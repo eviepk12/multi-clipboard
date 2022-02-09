@@ -1,24 +1,27 @@
+# Simple program to save the current copied object in your clipboard to a json key
+# Made by enal
+
 import sys
 import json
 import clipboard 
 
 SAVED_DATA = "clipboard.json"
 
-def save_items(filepath, data):
-    with open(filepath, "w") as f:
-        json.dump(data, f)
+def save_items(filepath, data): 
+    with open(filepath, "w") as f: #"w" means to write, and if there's no existing file to write it will create a new json file
+        json.dump(data, f) 
 
 def load_items(filepath):
     try:
-        with open(filepath, "r") as f:
+        with open(filepath, "r") as f: #"r" means to read
             data=json.load(f)
             return data
     except:
         return {}
 
-if len(sys.argv) == 2:
-    command = sys.argv[1]
-    data = load_items(SAVED_DATA)
+if len(sys.argv) == 2: #checks the lenght of the input to make sure it's right, 2 because of the filename and command
+    command = sys.argv[1] #ignores the filename and just inputs the command 
+    data = load_items(SAVED_DATA) 
 
     if command == "save":
         key = input("Enter a key you want saved: ")
@@ -39,13 +42,13 @@ if len(sys.argv) == 2:
         print(data)
 
     elif command == "help":
-        print("------------------------------------------------------------------")
+        print("\n------------------------------------------------------------------")
         print("List of commands: ")
-        print("------------------------------------------------------------------")
+        print("------------------------------------------------------------------ \n")
         print("1. Save (save the current thing in your clipboard to a given key)") 
         print("2. Load (load the given key you put in into your clipboard)") 
         print("3. List (list all the keys in the json file)")
-        print("4. Help (prints documentation on how to use the program)")
+        print("4. Help (prints documentation on how to use the program) \n")
 
     else:
         print("Unknown Command")
